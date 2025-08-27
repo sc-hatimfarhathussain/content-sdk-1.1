@@ -47,6 +47,7 @@ const Layout = ({ page }: LayoutProps): JSX.Element => {
   const fields = route?.fields as RouteFields;
   const mainClassPageEditing = mode.isEditing ? 'editing-mode' : 'prod-mode';
   const classNamesMain = `${mainClassPageEditing} ${body.variable} ${heading.variable} main-layout`;
+  const importMapDynamic = () => import('.sitecore/import-map');
 
   const metaTitle =
     fields?.metadataTitle?.value?.toString() || fields?.pageTitle?.value?.toString() || 'Page';
@@ -83,7 +84,7 @@ const Layout = ({ page }: LayoutProps): JSX.Element => {
         <ThemeProvider attribute="class" disableTransitionOnChange>
           <div className={`min-h-screen flex flex-col ${classNamesMain}`}>
             {mode.isDesignLibrary ? (
-              <DesignLibrary />
+              <DesignLibrary loadImportMap={importMapDynamic} />
             ) : (
               <>
                 <header>

@@ -55,6 +55,7 @@ const Layout = ({ page }: LayoutProps): JSX.Element => {
   const isPageEditing = page.mode.isEditing;
   const mainClassPageEditing = isPageEditing ? 'editing-mode' : 'prod-mode';
   const classNamesMain = `${mainClassPageEditing} ${body.variable} ${heading.variable} main-layout`;
+  const importMapDynamic = () => import('.sitecore/import-map');
 
   const metaTitle =
     fields?.metadataTitle?.value?.toString() || fields?.pageTitle?.value?.toString() || 'Page';
@@ -96,7 +97,7 @@ const Layout = ({ page }: LayoutProps): JSX.Element => {
         >
           <div className={`min-h-screen flex flex-col ${classNamesMain}`}>
             {page.mode.isDesignLibrary ? (
-              <DesignLibrary />
+              <DesignLibrary loadImportMap={importMapDynamic} />
             ) : (
               <>
                 <header>
